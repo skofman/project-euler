@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
 func main() {
 	fmt.Println(digits())
@@ -11,17 +15,26 @@ func digits() string {
 
 	store := 0
 	result := []string{}
+
+	for i := 49; i >= 0; i-- {
+		for j := 0; j < len(arr); j++ {
+			num, _ := strconv.Atoi((string)(arr[j][i]))
+			store += num
+		}
+		storeStr := strconv.Itoa(store)
+		result = append(result, (string)(storeStr[len(storeStr)-1]))
+		newStore, _ := strconv.Atoi(storeStr[0 : len(storeStr)-1])
+		store = newStore
+	}
+	newResult := reverseSlice(result)
+	storeStr := strconv.Itoa(store)
+
+	return storeStr + strings.Join(newResult[0:10-len(storeStr)], "")
 }
 
-//   var store = 0;
-//   var result = [];
-//   for (var i = 49; i >= 0; i--) {
-//     for (var j = 0; j < arr.length; j++) {
-//       store += Number(arr[j].charAt(i));
-//     }
-//     result.push(store.toString().charAt(store.toString().length - 1));
-//     store = Number(store.toString().slice(0,-1));
-//   }
-//   result.reverse();
-//   return store.toString() + result.slice(0,10 - store.toString().length).join('');
-// }
+func reverseSlice(slice []string) []string {
+	for i, j := 0, len(slice)-1; i < j; i, j = i+1, j-1 {
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+	return slice
+}
