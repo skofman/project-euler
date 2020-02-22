@@ -6,6 +6,15 @@ import (
 	"strings"
 )
 
+// GetNextPrime function
+func GetNextPrime(num int) int {
+	if IsPrime(num + 1) {
+		return num + 1
+	}
+
+	return GetNextPrime(num + 1)
+}
+
 // MaxInt function
 func MaxInt(arr []int) int {
 	max := 0
