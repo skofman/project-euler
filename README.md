@@ -8,4 +8,4 @@ My solutions, not the greatest but mine
 
 # Missing
 
-15, 26, 29, 43, 44, 50, 53, 59, 61
+15, 26, 29, 43, 44, 53, 59, 61
