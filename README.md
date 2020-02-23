@@ -6,7 +6,7 @@ My solutions, not the greatest but mine
 
 # 5%
 
-15, 26, 29, 43, 44, 53, 97
+15, 26, 29, 43, 44, 53
 
 # 10%
 
