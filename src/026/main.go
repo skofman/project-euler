@@ -2,32 +2,65 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strconv"
+	"strings"
 )
 
 func main() {
-	fmt.Println(cycles(10))
+	fmt.Println(cycles(1000))
 }
 
 func cycles(num int) int {
-	arr := [][]int{}
-	div := "10"
-	score := 0
-	for i := 1; i < num; i++ {
-		emptyArr := []int{0, 0, 0, 0}
-		arr = append(arr, emptyArr)
-		if len(div) < len(strconv.Itoa(i)) {
-			div += "0"
+	arr := make([]string, num+1)
+	arr[0] = ""
+	arr[1] = ""
+	for i := 2; i <= num; i++ {
+		str := ""
+		numb := 10
+		mult := 10
+		for j := 0; j < 10000; j++ {
+			div := numb / i
+			remainder := numb % i
+			str += strconv.Itoa(div)
+			if remainder == 0 {
+				break
+			} else {
+				numb = remainder * mult
+			}
 		}
-		for len(arr[i-1] < 10000) {
-			divNum, _ = strconv.Atoi(div)
-			score = (int)(math.Floor((float64)(divNum) / (float64)(i)))
-			arr[i-1] = append(arr[i-1], score)
-			div = strconv.Itoa(divNum-score*i) + "0"
-		}
-		div = "10"
+		arr[i] = str
 	}
-	str := ""
-	newArr := 
+
+	maxRepeat := 1
+	result := 2
+	for i := 2; i < len(arr); i++ {
+		if len(arr[i]) < 10000 {
+			continue
+		}
+		for j := 0; j < len(arr[i]); j++ {
+			testStr := arr[i]
+			foundRepeat := false
+			for k := 1; k < len(testStr)/2; k++ {
+				testValue := testStr[j : j+k]
+				values := len(testStr[j:]) / k
+				count := strings.Count(testStr, testValue)
+				if values == count && count > 2 {
+					nextValue := testStr[j+k : j+k*2]
+					if nextValue == testValue {
+						if len(testValue) > maxRepeat {
+							maxRepeat = len(testValue)
+							result = i
+						}
+						foundRepeat = true
+						break
+					}
+				}
+			}
+			if foundRepeat {
+				break
+			}
+		}
+	}
+
+	return result
 }
