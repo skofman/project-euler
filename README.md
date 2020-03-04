@@ -6,8 +6,6 @@ My solutions, not the greatest but mine
 
 # 5%
 
-29
-
 # 10%
 
 69, 71, 99
